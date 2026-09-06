@@ -2,44 +2,42 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DirectionVector : MonoBehaviour
+public class DirectionVector1 : MonoBehaviour
 {
-    //Public Attribtes
+    //Public Attributes
     public Transform finalTransform;
     public Transform initialTransform;
     public float speed = 1;
 
-    //Private Attribtes
+    //Private Attributes
     private Vector3 _directionVector;
 
     // Start is called before the first frame update
     void Start()
     {
-    }
 
+
+    }
+     
     // Update is called once per frame
     void Update()
     {
-        //Cálculo del vector direccion
-        _directionVector = finalTransform.position - initialTransform.position;
 
-        //Convierte el vector en unitario
+        _directionVector = finalTransform.position - initialTransform.position;
         _directionVector.Normalize();
 
-        //Dibujamos el vector
-        Debug.DrawRay(initialTransform.position, _directionVector * speed);
+        Debug.DrawRay(initialTransform.position, _directionVector);
 
-        //Traslate
         initialTransform.Translate(_directionVector * Time.deltaTime * speed);
 
-        //Magnitude
-        print("Magnitude: " + _directionVector.magnitude * speed);
+        float Distance = Vector3.Distance(initialTransform.position, finalTransform.position);
 
-        //Distance
-        float distance = Vector3.Distance(initialTransform.position, finalTransform.position);
-        print("Distance: " + distance);
-        if (distance < 10 || distance > 20)
+        print("Magnitude: " + _directionVector.magnitude);
+        print("Distance; " + Distance);
+
+        if (Distance < 10 || Distance > 20)
             speed *= -1;
-        
+
+
     }
 }
